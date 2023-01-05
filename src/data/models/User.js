@@ -22,7 +22,11 @@ const userSchema = new Schema({
   password: {
     type: String,
     required: true
-  }
+  },
+  files: [{
+    type: Schema.Types.ObjectId,
+    ref: 'File'
+  }]
 }, { timestamps: true })
 
 // Remplace le mot de passe de l'utilisateur par un équivalent crypté avant l'enregistrement dans la BDD
