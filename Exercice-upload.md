@@ -8,10 +8,11 @@ Objectif :
     d. L'URL du fichier (sans le domaine) ex: /files/<nom_du_fichier>
   2. Enregistrer le fichier en BDD lors d'un upload
 
-2. Modifier la méthode download pour télécharger un fichier par son ID et non pas par son nom
+2. Authentifier / protéger l'appel d'API d'upload & download
+
+3. Modifier la méthode download pour télécharger un fichier par son ID et non pas par son nom
   BONUS : Récupérer l'ID dans le body de la requête ET/OU dans les params
 
-3. Authentifier / protéger l'appel d'API d'upload & download
 
 --------------
 

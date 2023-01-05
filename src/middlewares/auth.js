@@ -5,6 +5,7 @@ const withAuth = (req, res, next) => {
     try {
       const decoded = jwt.verify(req.headers.authorization.split(' ')[1], process.env.TOKEN_SECRET)
       if (decoded && decoded.id) {
+        req.userId = decoded.id
         next()
       } else {
         return res.status(401).send()

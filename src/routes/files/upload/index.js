@@ -7,6 +7,7 @@ const { sanatizeFilename } = require('../../../tools/strings')
 // Instanciation de multer
 const multer = require('multer')
 const { createFile } = require('../../../controllers/filesController')
+const withAuth = require('../../../middlewares/auth')
 
 // Création du stockage sur le disque physique de la machine
 const storage = multer.diskStorage({
@@ -41,14 +42,12 @@ const upload = multer({
       return cb(new Error('File type must be ' + authorizedTypes))
     }
   }
-}) // = multer({ storage: storage })
+})
 
 // Route d'API
 router.route('/')
-  .post(upload.single('file'), async (req, res) => {
-    // TODO REMPLACER PAR ID DU TOKEN
-    const userId = '63b6d8f0d66786e8ceff0ef7'
-    const { file } = req
+  .post(withAuth, upload.single('file'), async (req, res) => {
+    const { file, userId } = req
     try {
       const savedFileObject = await createFile(file, userId)
       return res.send(savedFileObject)
