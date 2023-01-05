@@ -6,8 +6,6 @@ const { sanatizeFilename } = require('../../../tools/strings')
 
 // Instanciation de multer
 const multer = require('multer')
-const File = require('../../../data/models/File')
-const User = require('../../../data/models/User')
 const { createFile } = require('../../../controllers/filesController')
 
 // Création du stockage sur le disque physique de la machine

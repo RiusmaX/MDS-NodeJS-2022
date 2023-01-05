@@ -17,7 +17,7 @@ const createFile = async (file, userId) => {
 
   const savedFile = await newFile.save()
 
-  // Mise à jour de l'utilisateur avec le liste de fichiers
+  // Mise à jour de l'utilisateur avec sa liste de fichiers
   if (savedFile) {
     await User.findByIdAndUpdate(userId,
       { $push: { files: savedFile._id } },
