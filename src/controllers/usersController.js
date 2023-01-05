@@ -1,3 +1,4 @@
+const File = require('../data/models/File')
 const User = require('../data/models/User')
 
 const getUsers = async () => {
@@ -31,7 +32,7 @@ const getUserById = async (id) => {
   if (!id) {
     throw new Error('missing data')
   }
-  const user = await User.findById(id).select('-password')
+  const user = await User.findById(id).select('-password').populate('files')
   const userObject = user.toObject()
   return userObject
 }
@@ -56,6 +57,7 @@ const deleteUserById = async (id) => {
   if (!id) {
     throw new Error('missing data')
   }
+  await File.remove({ user: id }).exec()
   await User.findByIdAndDelete(id)
 }
 

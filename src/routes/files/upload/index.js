@@ -19,14 +19,35 @@ const storage = multer.diskStorage({
   }
 })
 
+const authorizedTypes = [
+  'png',
+  'jpeg',
+  'jpg',
+  'gif',
+  'webp',
+  'webm',
+  'pdf'
+]
+
 // Création du middleware d'upload
-const upload = multer({ storage }) // = multer({ storage: storage })
+const upload = multer({
+  storage,
+  fileFilter: (req, file, cb) => {
+    const type = file.mimetype.split('/')[1]
+    if (authorizedTypes.includes(type)) {
+      cb(null, true)
+    } else {
+      cb(null, false)
+      return cb(new Error('File type must be ' + authorizedTypes))
+    }
+  }
+}) // = multer({ storage: storage })
 
 // Route d'API
 router.route('/')
   .post(upload.single('file'), async (req, res) => {
     // TODO REMPLACER PAR ID DU TOKEN
-    const userId = '6399842861ba5bbedbeff3db'
+    const userId = '63b6d8f0d66786e8ceff0ef7'
     const { file } = req
     try {
       const savedFileObject = await createFile(file, userId)

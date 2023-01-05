@@ -47,8 +47,9 @@ router.route('/:id')
     try {
       await deleteUserById(req.params.id)
 
-      return res.send(`User with id : ${req._destroyparams.id} as been deleted`)
+      return res.send(`User with id : ${req.params.id} as been deleted`)
     } catch (error) {
+      console.error(error)
       return res.status(500).send(error)
     }
   })

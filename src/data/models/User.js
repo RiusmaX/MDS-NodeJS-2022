@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const { Schema } = mongoose
 // Identique à const Schema = mongoose.Schema
 const bcrypt = require('bcryptjs')
+const File = require('./File')
 
 const userSchema = new Schema({
   firstName: {
