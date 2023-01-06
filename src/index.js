@@ -1,12 +1,19 @@
 require('dotenv').config()
 
 const express = require('express')
+const helmet = require('helmet')
+const cors = require('cors')
 const app = express()
 const port = 3000
 
 // Connection à la base de données
 const connect = require('./data/helpers/db')
 connect()
+
+// Ajout de 9 middlewares de sécurité
+app.use(helmet())
+// Gestion du cross-origin
+app.use(cors())
 
 // Parmétrage de Express pour le body et le JSON
 app.use(express.urlencoded({ extended: true }))
