@@ -58,6 +58,7 @@ const deleteUserById = async (id) => {
     throw new Error('missing data')
   }
   await File.remove({ user: id }).exec()
+  // TODO : Supprimer les fichiers physiquement
   await User.findByIdAndDelete(id)
 }
 
